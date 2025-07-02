@@ -1,0 +1,252 @@
+﻿******************************************************************************************************************************
+Database
+******************************************************************************************************************************
+* A database is a collection of data.
+* A database may contain a single table or multiple tables.
+* MySQL operates on port 3306.
+
+
+Types of Databases
+* Relational Database / SQL Database
+* (MySQL, MariaDB, Aurora, PostgreSQL)
+* Non-Relational Database / NoSQL Database
+* (DynamoDB, MongoDB)
+
+
+Examples of Default Databases
+* Information_schema
+* Performance_schema
+* mysql
+* sys
+
+
+Step 1)
+* Create a Security Group (SG) with port numbers 22 and 3306.
+
+
+Step 2)
+* Create a Linux instance with ports 22 and 3306 open.
+
+
+Step 3)
+* Go to the RDS service and create a MySQL database.
+
+
+Step 4)
+* Connect to the Linux machine.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Install the MySQL package using the command
+* yum install -y mysql
+Connect to the database using the command
+* mysql  -h  endpoint  -u  username  -p password
+
+
+To see all databases
+* show databases;
+
+
+To create a database
+* create database database_name;
+
+
+To delete a database
+* drop database database_name;
+
+
+To enter into the database
+* use database_name;
+(OR)
+* connect database_name;
+
+
+To exit from the database
+* exit;
+******************************************************************************************************************************
+create table dec_batch(roll_no int(5), name varchar(10), city varchar(10), marks int(5));
+******************************************************************************************************************************
+create table dec_batch(roll_no int(5), name varchar(10), city varchar(10), marks int(5));
+
+
+1. insert into dec_batch values('1','sandesh','pune','70');
+2. insert into dec_batch values('2','ankita','mumbai','80');
+3. insert into dec_batch values('3','aditya','mumbai','70');
+4. insert into dec_batch values('4','nitin','nagpur','60');
+5. insert into dec_batch values('5','yash','nagpur','90');
+6. insert into dec_batch values('6','vaibhav','pune','90');
+
+
+1. select max(marks) from dec_batch;
+2. select min(marks) from dec_batch;
+3. select sum(marks) from dec_batch;
+4. select avg(marks) from dec_batch;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select city
+
+
+desc dec_batch;
+* select * from dec_batch;
+select city from dec_batch;
+* select distinct city from dec_batch;
+select * from dec_batch where city="mumbai";
+* select name from dec_batch where marks>80;
+select * from dec_batch where city="pune" or city="mumbai";
+* select * from dec_batch where city="pune" and marks=85;
+select * from dec_batch where not city="pune";
+* select * from dec_batch where not city="pune" and not city="mumbai";
+
+
+******************************************************************************************************************************
+
+
+select name from nov_batch where name like "m%";
+* update nov_batch set marks=85 where name="mayur";
+
+
+alter table nov_batch add column company varchar(10);
+* alter table nov_batch drop column company;
+* delete from nov_batch where roll_no=5;
+
+
+******************************************************************************************************************************
+command to take a backup of the database
+******************************************************************************************************************************
+command to take a backup of the database
+* mysqldump -h endpoint database_name > path_where_we_have_to_take_backup_of_database
+-u username -ppassword
+
+
+* mysqldump -h db1.c7lrhlzhj02u.us-east-2.rds.amazonaws.com db1 > /file1 -u admin -padmin123
+
+
+1. go to the database
+2. drop database db1;
+3. create database db1;
+4. use db1;
+5. show tables;
+6. Exit;
+
+
+command to restore a database
+
+
+* mysql -h endpoint database_name < path_from_where_we_have_to_restore_database -u username -ppassword
+
+
+* mysql -h db1.c7lrhlzhj02u.us-east-2.rds.amazonaws.com db1 < /file1  -u admin -padmin123
+we can take a backup of the database manually & Automatically (by using cron)
+* 30 05 * * *  mysqldump -h db1.c7lrhlzhj02u.us-east-2.rds.amazonaws.com db1 > /file1  -u admin -padmin123
+
+
+
+
+To see all users in the database:
+* select user from mysql.user;
+
+
+To see the permissions of a user:
+* show grants for 'username';
+
+
+To create a 'sagar' user:
+* create user 'sagar'@'%' identified by 'Android@50';
+
+
+To give read-only access to db1 for the 'sagar' user:
+* grant select on db1.* to 'sagar'@'%';
+
+
+To refresh the changes:
+* flush privileges:
+
+
+To give read-only access to all databases for the 'sagar' user:
+* grant select on *.* to 'sagar'@'%';
+* flush privileges;
+
+
+To give create access to all databases for the 'sagar' user:
+* grant create on *.* to 'sagar'@'%';
+* flush privileges;
+
+
+To give insert access to all databases for the 'sagar' user:
+* grant insert on *.* to 'sagar'@'%';
+* flush privileges;
+
+
+To give select, create, and insert access to the 'sagar' user for all databases:
+* grant select, create,insert on *.* to 'sagar'@'%';
+* flush privileges;
+
+
+To give full access to db1 for the 'sagar' user:
+* grant all privileges on db1.* to 'sagar'@'%';
+* flush privileges:
+
+
+To delete a user:
+* drop user 'username';
+
+
+
+
+******************************************************************************************************************************
+Diff between MySQL & Dynamodb
+******************************************************************************************************************************
+* MySQL is a relational database that organizes data into tables with rows and columns.
+* DynamoDB is a non-relational database that stores data in a key-value format.
+* MySQL database supports CLI, while DynamoDB supports a GUI.
+* DynamoDB is faster than MySQL.
+
+
+What do you know about MySQL databases?
+1. I know how to:
+2. Create and delete databases
+3. Connect to databases
+4. Create, delete, and update tables
+5. Use the WHERE clause
+6. Use the AND, OR, and NOT operators
+7. Use the MIN, MAX, SUM, and AVG functions
+8. Take a backup of a database
+9. Restore a database
+10. Manage users in databases
